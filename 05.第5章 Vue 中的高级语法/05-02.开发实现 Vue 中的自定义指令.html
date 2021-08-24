@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 29</title>
+    <style>
+        .header {
+            position: absolute
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+<script>
+    /*
+     全局自定义指令 directive
+     */
+    // const app = Vue.createApp({
+
+    //   template: `
+    //     <div>
+    //       <div >
+    //         <input v-focus />
+    //       </div>
+    //     </div>
+    //   `
+    // });
+    // // 全局自定义指令
+    // app.directive('focus', {
+    //   mounted(el) {
+    //     el.focus()
+    //   },
+    // })
+    /*
+     局部自定义指令 directive
+     */
+    //   const directives = {
+    //     focus: {
+    //       mounted(el) {
+    //         el.focus()
+    //       },
+    //     }
+    //   }
+
+    //   const app = Vue.createApp({
+    //     directives: directives,
+    //     template: `
+    //   <div>
+    //     <div >
+    //       <input v-focus />
+    //     </div>
+    //   </div>
+    // `
+    //   });
+    /*
+     自定义pos 指令
+      */
+    // const app = Vue.createApp({
+    //   data() {
+    //     return {
+    //       distance: 110
+    //     }
+    //   },
+    //   template: `
+    //     <div>
+    //       <div v-pos="top" class="header">
+    //         <input />
+    //       </div>
+    //     </div>
+    //   `
+    // });
+
+    // app.directive('pos', (el, binding) => {
+    //   el.style.top = (binding.value + 'px');
+    // })
+    // // 等價於
+    // app.directives('pos', {
+    //   mounted(el, bindding) {
+    //     el.style.top = (bindding.value + 'px')
+    //   },
+    //   updated(el, bindding) {
+    //     el.style.top = (bindding.value + 'px')
+    //   },
+    // })
+    const app = Vue.createApp({
+        data() {
+            return {
+                distance: 110
+            }
+        },
+        template: `
+      <div>
+        <div v-pos:right="distance" class="header">
+          <input />
+        </div>
+      </div>
+    `
+    });
+
+    app.directive('pos', (el, binding) => {
+        el.style[binding.arg] = (binding.value + 'px');
+    })
+
+    const vm = app.mount('#root');
+</script>
+
+</html>

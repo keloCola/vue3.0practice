@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 15</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            // return { num: 1234 }
+            return {
+                num: () => {
+                    alert(123)
+                }
+            }
+
+        },
+        template: `
+      <div><test :content="num" /></div>
+    `
+    });
+    // 动态传参
+    // app.component('test', {
+    //   props: ['content'],
+    //   template: `<div>{{typeof content}}</div>`
+    // })
+    // function
+    app.component('test', {
+        props:
+            {
+                content: Function
+            },
+        methods: {
+            handleClick() {
+                alert(456)
+                this.content()
+            }
+        },
+        template: `<div @click='this.handleClick'>{{typeof content}}</div>`
+    })
+    // type:String, Boolean, Array, Object, Function, Symbol
+    // required 必填
+    // default 默认值
+    // app.component('test', {
+    //   props: {
+    //     content: {
+    //       type: Number,
+    //       validator: function(value) {
+    //         return value < 1000;
+    //       },
+    //       default: function() {
+    //         return 456;
+    //       }
+    //     }
+    //   },
+    //   template: `<div>{{content}}</div>`
+    // });
+
+    const vm = app.mount('#root');
+</script>
+
+</html>

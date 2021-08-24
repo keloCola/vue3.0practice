@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 41</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+<script>
+    // provide, inject
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { provide } = Vue
+    //     provide('name', 'kelo')//key,value
+    //   },
+    //   template: `
+    //   <div>
+    //     <child/>
+    //     </div>`
+    // })
+    // app.component('child',{
+    //   setup( ) {
+    //     const {inject} = Vue
+    //     const name = inject('name','hello')//其中hello表示为默认值
+    //     return{name}
+    //   },
+    //   template:`
+    //   <div>{{name}}</div>`
+    // })
+    /* 子组件改变父组件的值 */
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { provide,ref } = Vue
+    //     const name = ref('kelo')
+    //     provide('name', name)//key,value
+    //     const changeName = (item)=>{
+    //       name.value= item
+    //     }
+    //     provide('changeName',changeName)
+    //   },
+    //   template: `
+    //   <div>
+    //     <child/>
+    //     </div>`
+    // })
+    // app.component('child',{
+    //   setup( ) {
+    //     const {inject} = Vue
+    //     const name = inject('name','hello')//其中hello表示为默认值
+    //     const changeName = inject('changeName')
+    //     const handleClick = ()=>{
+    //       changeName('可乐')
+    //     }
+    //     return{name,handleClick}
+    //   },
+    //   template:`
+    //   <div>{{name}}
+    //     <div @click='handleClick'>改变名字</div>
+    //     </div>`
+    // })
+    // dom ref
+    const app = Vue.createApp({
+        setup() {
+            const {ref, onMounted} = Vue
+            const hello = ref(null)//首先hello 要和获取节点的名称一致
+            onMounted(() => {
+                console.log(hello.value);
+            })
+            return {hello}
+        },
+        template: `
+    <div ref = 'hello'>hello world</div>
+    `
+    })
+
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { provide, ref, readonly } = Vue;
+    //     const name = ref('dell');
+    //     provide('name', readonly(name));
+    //     provide('changeName', (value) => {
+    //       name.value = value;
+    //     });
+    //     return { }
+    //   },
+    //   template: `
+    //     <div>
+    //       <child />
+    //     </div>
+    //   `,
+    // });
+
+    // app.component('child', {
+    //   setup() {
+    //     const { inject } = Vue;
+    //     const name = inject('name');
+    //     const changeName = inject('changeName');
+    //     const handleClick = () => {
+    //       changeName('lee');
+    //     }
+    //     return { name, handleClick }
+    //   },
+    //   template: '<div @click="handleClick">{{name}}</div>'
+    // })
+
+    // CompositionAPI 的语法下，获取真实的 DOM 元素节点
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { ref, onMounted } = Vue;
+    //     const hello = ref(null);
+    //     onMounted(() => {
+    //       console.log(hello.value);
+    //     })
+    //     return { hello }
+    //   },
+    //   template: `
+    //     <div>
+    //       <div ref="hello">hello world</div>
+    //     </div>
+    //   `,
+    // });
+
+    const vm = app.mount('#root');
+</script>
+
+</html>

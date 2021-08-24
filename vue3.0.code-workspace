@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\【前端面试】\\vue3.0\\code\\code-for-project"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "vue3.0practice"
+	}
+}

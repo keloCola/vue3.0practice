@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id='root'></div>
+</body>
+<script>
+    // 生命周期函数：在某一时刻会自动执行的函数
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello'
+            }
+        },
+        //  在实例生成前会自动执行的函数
+        beforeCreate() {
+            console.log('beforeCreate')
+        },
+        // 在实例生成后会自动执行的函数
+        created() {
+            console.log('create')
+        },
+        // 在组件内容渲染到页面之前自动执行的函数
+        beforeMount() {
+            console.log('beforeMount')
+        },
+        //   在组件内容渲染到页面之后自动执行的函数
+        mounted() {
+            console.log('mounted')
+        },
+        //  在 数据发生变化时会立即执行的函数
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+        //  在 数据发生变化，页面重新渲染后，会自动执行的函数
+        updated() {
+            console.log('updated')
+        },
+        // 当 Vue 应用失效时，自动执行的函数
+        beforeUnmount() {
+            console.log('beforeUnmount')
+        },
+        // 当vue应用失效，且 dom 完全销毁后，自动执行的函数
+        Unmount() {
+            console.log('Unmount')
+        },
+        template: "<div>{{message}}<div>"
+    })
+    app.mount('#root')
+</script>
+</html>

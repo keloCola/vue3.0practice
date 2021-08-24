@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world </title>
+    <!-- 引入vue库 -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="root">
+</div>
+
+</body>
+<script>
+    // createApp 创建一个vue实例 
+    // data 函数
+    // template 模板 展示的内容
+    // mounted 加载完自动执行
+    // mount 挂载在 root上
+    Vue.createApp({
+        data() {
+            return {
+                count: 1
+            }
+        },
+        mounted() {
+            setInterval(() => {
+                this.count++
+                // 相当于 this.$data.count
+            }, 1000)
+        },
+        template: '<div>hi</div>' +
+            '<div> {{count}} </div>'
+    }).mount('#root')
+</script>
+
+</html>

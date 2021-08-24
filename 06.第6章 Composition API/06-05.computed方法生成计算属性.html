@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 38</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+<script>
+    // computed 计算属性
+    /* 简单版 */
+    // computed 计算属性
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { ref, computed } = Vue;
+    //     const count = ref(0);
+    //     const handleClick = () => {
+    //       count.value += 1;
+    //     }
+    //     // 简单版
+    //     const countAddFive = computed(() => {
+    //       return count.value + 5
+    //     })
+
+    //     return { count, countAddFive, handleClick }
+    //   },
+    //   template: `
+    //     <div>
+    //       <span @click="handleClick">{{count}}</span> -- {{countAddFive}}
+    //     </div>
+    //   `,
+    // });
+    /* 复杂版 */
+    const app = Vue.createApp({
+        setup() {
+            const {reactive, computed} = Vue;
+            const countObj = reactive({count: 0});
+            const handleClick = () => {
+                countObj.count += 1;
+            }
+            let countAddFive = computed({
+                get: () => {
+                    return countObj.count + 5;
+                },
+                // 获取参数并修改
+                set: (param) => {
+                    countObj.count = param - 5;
+                }
+            })
+            // 3s后去修改
+            setTimeout(() => {
+                countAddFive.value = 10;
+            }, 1000)
+
+            return {countObj, countAddFive, handleClick}
+        },
+        template: `
+      <div>
+        <span @click="handleClick">{{countObj.count}}</span> -- {{countAddFive}}
+      </div>
+    `,
+    });
+
+    const vm = app.mount('#root');
+</script>
+
+</html>

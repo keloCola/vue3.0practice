@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 32</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+    /*
+    插件基础写法
+     */
+    // const myPlugin = {
+    //   install(app, options) {
+    //     console.log(app,options)
+    //   }
+    // }
+    // const app = Vue.createApp({
+    //   template: `
+    //     <div>hello</div>
+    //   `
+    // });
+    // app.use(myPlugin, { name: 'kelo'});
+    // plugin 插件, 也是把通用性的功能封装起来
+    const myPlugin = {
+        install(app, options) {
+            app.provide('name', 'Dell Lee');
+            app.directive('focus', {
+                mounted(el) {
+                    el.focus();
+                }
+            })
+            app.mixin({
+                mounted() {
+                    console.log('mixin')
+                }
+            })
+            // $ 表示对vue底层私有的进行扩展
+            app.config.globalProperties.$sayHello = 'hello world';
+        }
+    }
+
+    const app = Vue.createApp({
+        template: `
+      <my-title />
+    `
+    });
+
+    app.component('my-title', {
+        inject: ['name'],
+        mounted() {
+            // 和前面的 app.config.globalProperties.$sayHello 相对应
+            console.log(this.$sayHello);
+        },
+        template: `<div>{{name}}<input v-focus /></div>`
+    })
+
+    app.use(myPlugin, {name: 'kelo'});
+
+    const vm = app.mount('#root');
+</script>
+</html>

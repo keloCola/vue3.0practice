@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 基础 -->
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lesson 24</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    /* 入场动画 搭配 translate标签使用 */
+    .v-enter-from {
+      /* 开始 透明度为o */
+      opacity: 0;
+    }
+    .v-enter-active {
+      /* 入场的行为 这边设个缓慢 */
+      transition: opacity 3s ease-out;
+    }
+    .v-enter-to {
+      /* 结束 透明度为1*/
+      opacity: 1;
+    }
+    /* 出场动画 搭配 translate标签使用 */
+    .v-leave-from {
+      opacity: 1;
+    }
+    .v-leave-active {
+      transition: opacity 3s ease-in;
+    }
+    .v-leave-to {
+      opacity: 0;
+    }
+
+    /* @keyframes shake {
+      0% {
+        transform: translateX(-100px)
+      }
+      50% {
+        transform: translateX(-50px)
+      }
+      100% {
+        transform: translateX(50px)
+      }
+    }
+    .hello-leave-active {
+      animation: shake 3s;
+    }
+    .hello-enter-active {
+      animation: shake 3s;
+    } */
+  </style>
+
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  // 单元素，单组件的入场出场动画
+  /* 
+  基础
+   */
+  const app = Vue.createApp({
+    data() {
+      return {
+        show: false
+      }
+    },
+    methods: {
+      handleClick() {
+        this.show = !this.show;
+      }
+    },
+    template: `
+      <div>
+        <transition >
+          <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleClick">切换</button>
+      </div>
+    `
+  });
+  // const app = Vue.createApp({
+  //   data() {
+  //     return {
+  //       show: false
+  //     }
+  //   },
+  //   methods: {
+  //     handleClick() {
+  //       this.show = !this.show;
+  //     }
+  //   },
+  //   template: `
+  //     <div>
+  //       <transition name="hello">
+  //         <div v-if="show">hello world</div>
+  //       </transition>
+  //       <button @click="handleClick">切换</button>
+  //     </div>
+  //   `
+  // });
+
+  const vm = app.mount('#root');
+</script> -->
+<!-- 动画 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 24</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        @keyframes shake {
+            0% {
+                transform: translateX(-100px)
+            }
+            50% {
+                transform: translateX(-50px)
+            }
+            100% {
+                transform: translateX(50px)
+            }
+        }
+
+        .hello-leave-active {
+            animation: shake 3s;
+        }
+
+        .hello-enter-active {
+            animation: shake 3s;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+<script>
+    // 单元素，单组件的入场出场动画
+    const app = Vue.createApp({
+        data() {
+            return {
+                show: false
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            }
+        },
+        template: `
+      <div>
+        <transition name='hello'>
+          <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleClick">切换</button>
+      </div>
+    `
+    });
+
+    const vm = app.mount('#root');
+</script>
+</html>

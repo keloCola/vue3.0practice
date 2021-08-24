@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 36</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+    // toRef, context
+    const app = Vue.createApp({
+        methods: {
+            handleChange() {
+                alert('change');
+            }
+        },
+        template: `<child @change="handleChange" param='params'>parent</child>`,
+    });
+
+    app.component('child', {
+        template: '<div @click="handleClick">123123</div>',
+        setup(props, context) {
+            const {h} = Vue;
+            const {attrs, slots, emit} = context;
+            // console.log(attrs);
+            // attrs None-props 父组件传过来的 子组件在props中未接受的
+            // slots 插槽 使用h函数将插槽内容回显
+            // return ()=>h('div',{},slots.default())
+            function handleClick() {
+                emit('change');
+            }
+
+            return {handleClick}
+        }
+    })
+    const vm = app.mount('#root');
+</script>
+</html>
